@@ -19,7 +19,7 @@ function sanitizeFormString($inputText) {
 }
 
 if(isset($_POST['registerButton'])) {
-  // when register button is pressed
+  // when register button is clicked 
   $username = sanitizeFormUsername($_POST['username']);
   $firstName = sanitizeFormString($_POST['firstName']);
   $lastName = sanitizeFormString($_POST['lastName']);
@@ -27,6 +27,12 @@ if(isset($_POST['registerButton'])) {
   $email2 = sanitizeFormString($_POST['email2']);
   $password = sanitizeFormPassword($_POST['password']);
   $password2 = sanitizeFormPassword($_POST['password2']);
+
+  $regSuccessful = $account->register($username, $firstName, $lastName, $email, $email2, $password, $password2);
+
+  if($regSuccessful) {
+    heder("Location: index.php");
+  }
 }
 
 ?>
