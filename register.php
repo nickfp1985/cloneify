@@ -32,21 +32,29 @@
     <form id="registerForm" action="register.php" method="POST">
     <h2>Sign up with your email address</h2>
     <p>
+      <?php echo $account->getError("Your username must be between 5-25 characters"); ?>
       <input id="username" name="username" type="text" placeholder="What should we call you?" required>
     </p>
     <p>
+      <?php echo $account->getError("Your first name must be between 2-25 characters"); ?>
       <input id="firstName" name="firstName" type="text" placeholder="First Name" required>
     </p>
     <p>
+      <?php echo $account->getError("Your last name must be between 2-25 characters"); ?>
       <input id="lastName" name="lastName" type="text" placeholder="Last Name" required>
     </p>
     <p>
+      <?php echo $account->getError("The emails do not match."); ?>
+      <?php echo $account->getError("Email is invalid."); ?>
       <input id="email" name="email" type="email" placeholder="Email" required>
     </p>
     <p>
       <input id="email2" name="email2" type="email" placeholder="Confirm Email" required>
     </p>
     <p>
+      <?php echo $account->getError("The passwords do not match."); ?>
+      <?php echo $account->getError("The password can only contain numbers and letters."); ?>
+      <?php echo $account->getError("Your password must be between 5-30 characters."); ?>
       <input id="password" name="password" type="password" placeholder="Password" required>
     </p>
     <p>
