@@ -19,7 +19,7 @@ function sanitizeFormString($inputText) {
 }
 
 if(isset($_POST['registerButton'])) {
-  // when register button is clicked 
+  // validate registration form when register button is clicked 
   $username = sanitizeFormUsername($_POST['username']);
   $firstName = sanitizeFormString($_POST['firstName']);
   $lastName = sanitizeFormString($_POST['lastName']);
