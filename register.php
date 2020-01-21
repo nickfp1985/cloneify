@@ -1,10 +1,17 @@
 <?php
   include("includes/classes/Account.php");
+  include("includes/classes/Constants.php");
 
   $account = new Account();
 
   include("includes/handlers/register-handler.php");
   include("includes/handlers/login-handler.php");
+
+  function getInputValue($name) {
+    if(isset($_POST[$name])) {
+      echo $_POST[$name];
+    }
+  }
 ?>
 
 
@@ -17,7 +24,10 @@
 </head>
 <body>
   <div id="inputContainer">
-  
+
+    <!-- 
+      USER LOGIN FORM 
+    -->
     <form id="loginForm" action="register.php" method="POST">
     <h2>Log in to Cloneify</h2>
     <p>
@@ -29,32 +39,35 @@
     <button type="submit" name="loginButton">Log In</button>
     </form>
 
+    <!-- 
+      NEW ACCOUNT REGISTRATION FORM 
+    -->
     <form id="registerForm" action="register.php" method="POST">
     <h2>Sign up with your email address</h2>
     <p>
-      <?php echo $account->getError("Your username must be between 5-25 characters"); ?>
-      <input id="username" name="username" type="text" placeholder="What should we call you?" required>
+      <?php echo $account->getError(Constants::$unLength); ?>
+      <input id="username" name="username" type="text" placeholder="What should we call you?" value="<?php getInputValue('username') ?>" required>
     </p>
     <p>
-      <?php echo $account->getError("Your first name must be between 2-25 characters"); ?>
-      <input id="firstName" name="firstName" type="text" placeholder="First Name" required>
+      <?php echo $account->getError(Contants::fnLength); ?>
+      <input id="firstName" name="firstName" type="text" placeholder="First Name" value="<?php getInputValue('firstName') ?>" required>
     </p>
     <p>
-      <?php echo $account->getError("Your last name must be between 2-25 characters"); ?>
-      <input id="lastName" name="lastName" type="text" placeholder="Last Name" required>
+      <?php echo $account->getError(Constants::$lnLength); ?>
+      <input id="lastName" name="lastName" type="text" placeholder="Last Name" value="<?php getInputValue('lastName') ?>" required>
     </p>
     <p>
-      <?php echo $account->getError("The emails do not match."); ?>
-      <?php echo $account->getError("Email is invalid."); ?>
-      <input id="email" name="email" type="email" placeholder="Email" required>
+      <?php echo $account->getError(Constants::$emailDoNotMatch); ?>
+      <?php echo $account->getError(Constants::$emailInvalid); ?>
+      <input id="email" name="email" type="email" placeholder="Email" value="<?php getInputValue('email') ?>" required>
     </p>
     <p>
-      <input id="email2" name="email2" type="email" placeholder="Confirm Email" required>
+      <input id="email2" name="email2" type="email" placeholder="Confirm Email" value="<?php getInputValue('email2') ?>" required>
     </p>
     <p>
-      <?php echo $account->getError("The passwords do not match."); ?>
-      <?php echo $account->getError("The password can only contain numbers and letters."); ?>
-      <?php echo $account->getError("Your password must be between 5-30 characters."); ?>
+      <?php echo $account->getError(Constants::$pwDoNotMatch); ?>
+      <?php echo $account->getError(Constants::$pwNotAlphanumeric); ?>
+      <?php echo $account->getError(Constants::$pwLength); ?>
       <input id="password" name="password" type="password" placeholder="Password" required>
     </p>
     <p>
